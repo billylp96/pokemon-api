@@ -1,0 +1,8 @@
+<div class="join flex justify-center">
+  <button class="join-item btn" [routerLink]="[]" [queryParams]="{page:1}">First</button>
+  <button class="join-item btn" [routerLink]="[]" [queryParams]="{page:currentPage()==1 ? currentPage():currentPage()-1}">«</button>
+  <button class="join-item btn">Page {{currentPage()}} of {{totalPages()}} </button>
+  <button class="join-item btn" [routerLink]="[]" [queryParams]="{page:currentPage()+1}">»</button>
+  <button class="join-item btn" [routerLink]="[]" [queryParams]="{page:(totalPages())}">Last </button>
+</div>
+

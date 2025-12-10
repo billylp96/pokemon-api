@@ -1,0 +1,23 @@
+@if (pokemonResource.isLoading()) {
+<div class="my-4 text-center">Cargando...</div>
+}
+
+@else if (pokemonResource.value()) {
+
+  <app-paginator [currentPage]="paginatorService.currentPage()"
+    [totalPages]="totalPages()"></app-paginator>
+
+
+
+<!-- 🔹 TABLA| -->
+<div class="grid grid-cols-4 gap-4 mt-15 mb-15">
+  @for (pokemon of pokemonResource.value()?.results; track pokemon.name) {
+  <app-pokemon-card [inputName]="pokemon.name" />
+  }
+</div>
+
+<app-paginator [currentPage]="paginatorService.currentPage()"
+    [totalPages]="totalPages()"></app-paginator>
+
+
+}
