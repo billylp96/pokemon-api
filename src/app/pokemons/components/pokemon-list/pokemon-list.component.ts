@@ -5,6 +5,8 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { PokemonResponse, PokemonResult } from '../../interfaces/pokemon-response.interface';
 import { PaginatorComponent } from "../../../shared/components/paginator/paginator.component";
 import { PaginatorService } from '../../../shared/components/paginator/paginator.service';
+import { filter, map, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -14,25 +16,62 @@ import { PaginatorService } from '../../../shared/components/paginator/paginator
 })
 export class PokemonListComponent {
   private service = inject(PokemonService)
-   paginatorService = inject(PaginatorService);
+  paginatorService = inject(PaginatorService);
+  router = inject(Router);
 
-   limit = signal(12);
+  limit = signal(12);
   // offset = signal(0);
-   apiCount = computed(() => this.pokemonResource.value()?.count ?? 0);
-   totalPages = computed(() => Math.ceil(this.apiCount() / this.limit()))
-  // currentPage = computed(() => Math.floor(this.offset() / this.limit()) + 1 );
+  apiCount = computed(() => this.pokemonResource.value()?.count ?? 0);
+  totalPages = computed(() => Math.ceil(this.apiCount() / this.limit()))
 
-  // effect= effect(()=>{
-  //   console.log(this.currentPage());
-    
-  // })
+  search = signal('');
+
+  // pokemonResource = rxResource({
+  //   params: () => ({page: this.paginatorService.currentPage() -1 }),
+  //   stream: ({ params }) => this.service.getPokemons({
+  //     offset: params.page * this.limit()
+  //   })
+  // });
+
+
+  onSearch(term: string) {
+    this.search.set(term.toLowerCase());
+    this.router.navigate([])
+  }
+
 
   pokemonResource = rxResource({
-    params: () => ({page: this.paginatorService.currentPage() -1 }),
-    stream: ({ params }) => this.service.getPokemons({
-      offset: params.page * this.limit()
-    })
+    params: () => ({
+      page: this.paginatorService.currentPage() - 1,
+      search: this.search()
+    }),
+    stream: ({ params }) => {
+
+      // Caso A: si search no está vacío → búsqueda local
+      if (params.search.trim().length > 0) {
+        console.log("entro a search");
+
+        return this.service.getAllPokemons({
+          offset: params.page * this.limit(),
+          paramsPage: params.page,
+          term: params.search
+        })
+      }
+
+      // Caso B: búsqueda vacía → paginación normal
+      return this.service.getPokemons({
+        offset: params.page * this.limit()
+      }).pipe(
+        //filter(()=>params.search.trim().length==0),
+        tap((res) => {
+          console.log("entro al normal")
+          console.log(res.count)
+        }
+        )
+      );
+    }
   });
+
 
   // firstPage() {
   //   this.offset.update(v => 0);
