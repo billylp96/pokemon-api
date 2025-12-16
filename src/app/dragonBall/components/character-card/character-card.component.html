@@ -1,0 +1,20 @@
+<div class="card card-side bg-base-100 shadow-sm mb-10 size-150 ">
+  <figure>
+    <img
+      [src]="image()"
+      [alt]="character().name"
+      class="size-50%" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title text-4xl">{{character().name}}</h2>
+    <div class="w-80 overflow-auto mt-5">
+      @for (propertie of characterProperties() ; track propertie) {
+        <p><span class="font-extrabold"> {{propertie.key | titlecase}}</span>  : {{propertie.value}}</p>
+         <br>
+      }
+    </div>
+    <div class="card-actions justify-end">
+      <button class="btn btn-primary">Watch</button>
+    </div>
+  </div>
+</div>

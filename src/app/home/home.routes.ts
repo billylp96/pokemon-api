@@ -8,25 +8,29 @@ export const homeRoutes: Routes = [
     component: FrontLayoutComponent,
     children: [
       {
-        path:'home',
-        component:HomePageComponent,
-        children:[
+        path: 'home',
+        component: HomePageComponent,
+        children: [
           {
-            path:'pokemon',
-            loadChildren: ()=>import("../pokemons/pokemon.routes")
+            path: 'pokemon',
+            loadChildren: () => import("../pokemons/pokemon.routes")
           },
           {
-            path:'**',
-            redirectTo:'pokemon'
+            path: 'dbz',
+            loadChildren: () => import("../dragonBall/dragon-ball.routes")
+          },
+          {
+            path: '**',
+            redirectTo: 'pokemon'
           }
         ]
       },
 
       {
-        path:"**",
-        redirectTo:'home/pokemon'
+        path: "**",
+        redirectTo: 'home/pokemon'
       }
-      
+
     ]
 
   },

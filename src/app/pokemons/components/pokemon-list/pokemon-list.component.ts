@@ -20,19 +20,10 @@ export class PokemonListComponent {
   router = inject(Router);
 
   limit = signal(12);
-  // offset = signal(0);
   apiCount = computed(() => this.pokemonResource.value()?.count ?? 0);
   totalPages = computed(() => Math.ceil(this.apiCount() / this.limit()))
 
   search = signal('');
-
-  // pokemonResource = rxResource({
-  //   params: () => ({page: this.paginatorService.currentPage() -1 }),
-  //   stream: ({ params }) => this.service.getPokemons({
-  //     offset: params.page * this.limit()
-  //   })
-  // });
-
 
   onSearch(term: string) {
     this.search.set(term.toLowerCase());
@@ -51,7 +42,7 @@ export class PokemonListComponent {
       if (params.search.trim().length > 0) {
         console.log("entro a search");
 
-        return this.service.getAllPokemons({
+        return this.service.searchPokemonsByName({
           offset: params.page * this.limit(),
           paramsPage: params.page,
           term: params.search
@@ -72,22 +63,6 @@ export class PokemonListComponent {
     }
   });
 
-
-  // firstPage() {
-  //   this.offset.update(v => 0);
-  // }
-  // lastPage() {
-  //   this.offset.set((this.totalPages() - 1) * this.limit());
-  //   //this.offset.update(v => this.apiCount() - this.limit());
-  // }
-
-  // nextPage() {
-  //   this.offset.update(v => this.offset() + this.limit());
-  // }
-
-  // previousPage() {
-  //   this.offset.update(v => Math.max(0, (this.offset() - this.limit())));
-  // }
 
 
 

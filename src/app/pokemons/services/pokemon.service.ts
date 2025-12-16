@@ -5,7 +5,7 @@ import { delay, map, Observable, tap } from 'rxjs';
 import { Pokemon } from '../interfaces/pokemon.interface';
 import { PokemonResponse } from '../interfaces/pokemon-response.interface';
 
-export interface Options {
+ interface Options {
   limit?: number,
   offset?: number,
   term?: string,
@@ -34,7 +34,7 @@ export class PokemonService {
     )
   }
 
-  getAllPokemons(options: Options): Observable<PokemonResponse> {
+  searchPokemonsByName(options: Options): Observable<PokemonResponse> {
     const { limit = 12, offset = 0, term = '', paramsPage = 0 } = options;
     let paramsHttp = new HttpParams().append("limit", 100000).append("offset", 0);
     return this.http.get<PokemonResponse>(`${this.url}/pokemon`, { params: paramsHttp}).pipe(

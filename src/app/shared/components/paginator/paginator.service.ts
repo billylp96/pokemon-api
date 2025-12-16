@@ -15,6 +15,7 @@ export class PaginatorService {
     this.route.queryParamMap.pipe(
       map((params) => params.get("page") ? +params.get("page")! : 1),
       map((page) => isNaN(page) ? 1 : page),
+      map((page) => page==0 ? 1:page),
     ),
     { initialValue: 1 }
   )
