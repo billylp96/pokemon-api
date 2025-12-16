@@ -1,29 +1,31 @@
-<div class="card bg-base-100 w-50 shadow-sm mb-5">
-  <figure>
-    <img [src]="pokemonResource.value()?.sprites?.front_default" [alt]="pokemonResource.value()?.name"
-      class="size-30" />
-  </figure>
-  <div class="card-body">
-    <h2 class="card-title">
-      {{pokemonResource.value() | pokemonName | titlecase}}
-    </h2>
-    <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
-    
-    @for (type of pokemonResource.value()?.types; track $index) {
-    <div class="card-actions justify-end">
-      <div class="badge badge-outline"
-      [ngClass]="type.type.name | pokemonTypeColor"
-      >{{type.type.name}}</div>
-    </div>
-  }
+<div class="card bg-base-100 w-50 shadow-sm mb-5 cursor-pointer">
 
-    <button (click)="playCry(pokemonResource.value()?.cries?.latest)" class="flex items-center gap-2 px-4 py-2 rounded-xl
+  <a [routerLink]="['../view',pokemonResource.value()?.name]">
+    <figure>
+      <img [src]="pokemonResource.value()?.sprites?.front_default" [alt]="pokemonResource.value()?.name"
+        class="size-30" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">
+        {{pokemonResource.value() | pokemonName | titlecase}}
+      </h2>
+
+      @for (type of pokemonResource.value()?.types; track $index) {
+      <div class="card-actions justify-end">
+        <div class="badge badge-outline" [ngClass]="type.type.name | pokemonTypeColor">{{type.type.name}}</div>
+      </div>
+      }
+    </div>
+  </a>
+
+  @if(pokemonResource.value()?.cries?.latest){
+  <button (click)="playCry(pokemonResource.value()?.cries?.latest)" class="flex items-center gap-2 px-4 py-2 rounded-xl
          bg-indigo-600 text-white font-semibold
          hover:bg-indigo-700 active:scale-95
          transition-all shadow-md">
-      🔊 Play Cry
-    </button>
+    🔊 Play Cry
+  </button>
+  }
 
 
-  </div>
 </div>

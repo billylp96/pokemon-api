@@ -68,7 +68,16 @@ export class PokemonService {
             abilities: response.abilities,
             cries: response.cries,
             moves: response.moves,
-            sprites: response.sprites,
+            sprites: {
+              front_default:response.sprites.front_default,
+              back_default:response.sprites.back_default,
+              front_female:response.sprites.front_female,
+              back_female:response.sprites.back_female,
+              front_shiny:response.sprites.front_shiny,
+              back_shiny:response.sprites.back_shiny,
+              front_shiny_female:response.sprites.front_shiny_female,
+              back_shiny_female:response.sprites.back_shiny_female,
+            },
             types: response.types,
           }
         })

@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { PokemonNamePipe } from "../../pipes/pokemon-name.pipe";
 import { PokemonTypeColorPipe } from "../../pipes/pokemon-type-color.pipe";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-pokemon-card',
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.css'],
-  imports: [TitleCasePipe, PokemonNamePipe, PokemonTypeColorPipe,CommonModule]
+  imports: [TitleCasePipe, PokemonNamePipe, PokemonTypeColorPipe, CommonModule, RouterLink]
 })
 export class PokemonCardComponent {
   private service = inject(PokemonService);

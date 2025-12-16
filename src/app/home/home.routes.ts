@@ -24,7 +24,7 @@ export const homeRoutes: Routes = [
 
       {
         path:"**",
-        redirectTo:'home'
+        redirectTo:'home/pokemon'
       }
       
     ]
