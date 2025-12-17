@@ -20,13 +20,16 @@ export class DbzService {
 
   getCharacters(options: DbzOptions): Observable<CharactersResponse> {
     const { page = 0, limit = 10 } = options
-
     return this.http.get<CharactersResponse>(`${this.url}/characters`, {params:
       {
         page,
         limit
       }
     })
+  }
+
+  getCharacter(id:number): Observable<Character> {
+    return this.http.get<Character>(`${this.url}/characters/${id}`);
   }
 
 }

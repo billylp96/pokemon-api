@@ -21,8 +21,7 @@ export class DbzHomePageComponent {
     params: () => ({ page: this.paginationService.currentPage()  }),
     stream: ({ params }) => {
       return this.service.getCharacters({ page: params.page }).pipe(delay(300),
-        tap(res => console.log(res)
-        ))
+        )
     }
   });
 

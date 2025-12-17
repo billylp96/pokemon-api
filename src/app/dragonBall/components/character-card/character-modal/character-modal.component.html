@@ -1,0 +1,46 @@
+<dialog #modal class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box max-w-3xl">
+
+    <h3 class="text-4xl font-bold mb-5 flex justify-center">
+      {{ characterResource.value()?.name }}
+    </h3>
+
+    <div class="mb-10">
+      <h1 class="text-4xl">Planet</h1>
+      <hr>
+      @for (propertie of originPlanet(); track propertie) {
+      <div class="mt-5">
+        <p><span class="font-extrabold"> {{propertie.key | titlecase}}</span> : {{propertie.value}}</p>
+      </div>
+      }
+    </div>
+
+    @if(transformationsArray()?.length!>0){
+    <div>
+      <h1 class="text-4xl">Transformations</h1>
+      <hr>
+
+      @for (transformation of transformationsArray(); track transformation) {
+      <div class="mt-5 text-2xl mb-10 flex justify-center">
+        <div class="card bg-neutral text-neutral-content w-96 p-5">
+          <p class="font-extrabold">Name: <span class="text-accent">{{transformation.name| titlecase}} </span></p>
+          <p class="font-extrabold">KI: <span class="text-accent"> {{transformation.ki}}</span></p>
+
+          <div class="flex justify-center">
+            <img [src]="transformation.image" [alt]="transformation.name" class="h-80 w-50">
+          </div>
+        </div>
+      </div>
+      }
+
+    </div>
+    }
+    <div class="modal-action">
+      <button class="btn" (click)="closeModal()">Close</button>
+    </div>
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+      (click)="closeModal()">✕</button>
+    </form>
+  </div>
+</dialog>
