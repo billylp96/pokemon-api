@@ -52,14 +52,7 @@ export class PokemonListComponent {
       // Caso B: búsqueda vacía → paginación normal
       return this.service.getPokemons({
         offset: params.page * this.limit()
-      }).pipe(
-        //filter(()=>params.search.trim().length==0),
-        tap((res) => {
-          console.log("entro al normal")
-          console.log(res.count)
-        }
-        )
-      );
+      })
     }
   });
 

@@ -20,8 +20,7 @@ export class DbzHomePageComponent {
   dbzResource = rxResource({
     params: () => ({ page: this.paginationService.currentPage()  }),
     stream: ({ params }) => {
-      return this.service.getCharacters({ page: params.page }).pipe(delay(300),
-        )
+      return this.service.getCharacters({ page: params.page }).pipe(delay(300),)
     }
   });
 

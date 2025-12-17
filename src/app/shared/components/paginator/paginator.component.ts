@@ -1,5 +1,5 @@
-import { Component, input, OnInit, signal } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-paginator',
@@ -10,4 +10,5 @@ import { RouterLink } from "@angular/router";
 export class PaginatorComponent {
   currentPage=input.required<number>();
   totalPages=input.required<number>();
+  
 }

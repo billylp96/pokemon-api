@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { delay, map, Observable, tap } from 'rxjs';
+import { delay, map, Observable, of, tap } from 'rxjs';
 import { Pokemon } from '../interfaces/pokemon.interface';
 import { PokemonResponse } from '../interfaces/pokemon-response.interface';
 
@@ -21,16 +21,18 @@ export class PokemonService {
 
   getPokemons(options: Options): Observable<PokemonResponse> {
     const { limit = 12, offset = 0 } = options;
-    console.log("limit",limit);
-    console.log("offset",offset);
-    
     let params = new HttpParams().append("limit", limit).append("offset", offset);
+
+    const key=`pokemon-${limit}-${offset}`
+
+    if(sessionStorage.getItem(key)){
+      const pokemonResponse= JSON.parse(sessionStorage.getItem(key) || "{}")
+      return of(pokemonResponse).pipe(delay(300));
+    }
+
     return this.http.get<PokemonResponse>(`${this.url}/pokemon`, { params: params }).pipe(
       delay(300),
-      tap(
-        (res)=>console.log("count",res.count)
-        
-      )
+      tap(res=>sessionStorage.setItem(key,JSON.stringify(res)))
     )
   }
 
