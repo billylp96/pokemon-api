@@ -1,0 +1,7 @@
+<app-paginator [currentPage]="paginationService.currentPage()" [totalPages]="totalPages()"></app-paginator>
+
+@for (planet of planetsResource.value()?.items; track planet) {
+  <app-planet-card [planet]="planet"></app-planet-card>
+}
+
+<app-paginator [currentPage]="paginationService.currentPage()" [totalPages]="totalPages()"></app-paginator>

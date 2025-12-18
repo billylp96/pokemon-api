@@ -10,9 +10,9 @@
       <br>
       }
     </div>
-    <div class="card-actions justify-end">
+    <div class="card-actions justify-end mt-5">
       <button class="btn btn-primary" (click)="openModal.set(true)">
-        Watch
+        Details
       </button>
       @if (openModal()) {
       <app-character-modal [characterId]="character().id" (close)="openModal.set($event)"/>

@@ -1,8 +1,7 @@
 import { Component, computed, effect, ElementRef, inject, input, OnInit, output, viewChild } from '@angular/core';
-import { Character } from '../../../interfaces/character-interface';
-import { DbzService } from '../../../services/dbz.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { TitleCasePipe } from '@angular/common';
+import { DbzService } from '../../../services/dbz.service';
 
 @Component({
   selector: 'app-character-modal',
@@ -29,7 +28,7 @@ export class CharacterModalComponent {
     if (originPlanet) {
       return Object.entries(originPlanet)
         .map(([key, value]) => { return { key, value } })
-        .filter(( object ) => object.value!= null && object.key!='id' && object.key!='image')
+        .filter((object) => object.value != null && object.key != 'id' && object.key != 'image')
     }
     return []
   });
@@ -38,27 +37,11 @@ export class CharacterModalComponent {
     return this.characterResource.value()?.transformations;
   });
 
-  // transformations = computed(() => {
-
-  //   if (this.transformationsArray()) {
-  //     return Object.entries(this.transformationsArray())
-  //       .map(([key, value]) => { return { key, value } })
-  //       .filter(({ key, value }) => value != null && key == 'id');
-  //   }
-  // });
-
   effects = effect(() => {
     this.openModal();
     this.service.getCharacter(this.characterId()).subscribe(res => console.log(res)
     );
   });
-
-  // ngAfterViewInit() {
-  //   this.modal()?.nativeElement.showModal();
-
-  //   this.service.getCharacter(this.characterId())
-  //     .subscribe(res => console.log(res));
-  // }
 
   openModal() {
     this.modal()?.nativeElement.showModal()
