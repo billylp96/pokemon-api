@@ -1,34 +1,36 @@
-<app-paginator [currentPage]="paginatorService.currentPage()" [totalPages]="totalPages()"></app-paginator>
+<div class="min-h-screen flex flex-col flex-1">
+  <app-paginator [currentPage]="paginatorService.currentPage()" [totalPages]="totalPages()"></app-paginator>
 
-<!-- input busqueda -->
-<label class="input focus-within:border-indigo-500 focus-within:ring-indigo-500">
-  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
-      <circle cx="11" cy="11" r="8"></circle>
-      <path d="m21 21-4.3-4.3"></path>
-    </g>
-  </svg>
-  <input type="search" class="focus:outline-none" placeholder="Buscar"
-   (input)="onSearch(searchInput.value)" #searchInput />
-</label>
+  <!-- input busqueda -->
+  <label class="input focus-within:border-indigo-500 focus-within:ring-indigo-500">
+    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </g>
+    </svg>
+    <input type="search" class="focus:outline-none" placeholder="Buscar" (input)="onSearch(searchInput.value)"
+      #searchInput />
+  </label>
 
 
-@if (pokemonResource.isLoading()) {
-<div class="my-4 text-center">Cargando...</div>
-}
+  @if (pokemonResource.isLoading()) {
+  <app-loading-spinner />
+  }
 
-@else if (pokemonResource.value()?.results?.length!>0) {
-<!-- 🔹 TABLA| -->
-<div class="grid grid-cols-4 gap-4 mt-15 mb-15">
-  @for (pokemon of pokemonResource.value()?.results; track pokemon.name) {
-  <app-pokemon-card [inputName]="pokemon.name" />
+  @else if (pokemonResource.value()?.results?.length!>0) {
+  <!-- 🔹 TABLA| -->
+  <div class="grid grid-cols-4 gap-4 mt-15 mb-15 ">
+    @for (pokemon of pokemonResource.value()?.results; track pokemon.name) {
+    <app-pokemon-card [inputName]="pokemon.name" />
+    }
+  </div>
+
+  <app-paginator [currentPage]="paginatorService.currentPage()" [totalPages]="totalPages()"></app-paginator>
+
+  }@else {
+  <div class="mt-10 flex justify-center">
+    <p> No se encontraron datos con la busqueda '{{search()}}'</p>
+  </div>
   }
 </div>
-
-<app-paginator [currentPage]="paginatorService.currentPage()" [totalPages]="totalPages()"></app-paginator>
-
-}@else {
-<div class="mt-10 flex justify-center">
-  <p> No se encontraron datos con la busqueda '{{search()}}'</p>
-</div>
-}

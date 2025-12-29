@@ -7,12 +7,13 @@ import { PaginatorComponent } from "../../../shared/components/paginator/paginat
 import { PaginatorService } from '../../../shared/components/paginator/paginator.service';
 import { filter, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { LoadingSpinnerComponent } from "../../../shared/components/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css'],
-  imports: [PokemonCardComponent, PaginatorComponent]
+  imports: [PokemonCardComponent, PaginatorComponent, LoadingSpinnerComponent]
 })
 export class PokemonListComponent {
   private service = inject(PokemonService)

@@ -1,9 +1,18 @@
-<app-paginator [currentPage]="paginationService.currentPage()" [totalPages]="totalPages()" />
+<div class="flex flex-col min-h-screen">
+  <app-tittle [title]="title"/>
+  <app-paginator [currentPage]="paginationService.currentPage()" [totalPages]="totalPages()" />
 
-<div class="grid grid-cols-2 gap-5 mt-15 mb-15">
-  @for (character of characters(); track character.id) {
-  <app-character-card [character]="character" />
+  @if (dbzResource.isLoading()){
+  <app-loading-spinner />
   }
-</div>
 
-<app-paginator [currentPage]="paginationService.currentPage()" [totalPages]="totalPages()" />
+
+  <div class="grid grid-cols-2 gap-5 flex-1">
+    @for (character of characters(); track character.id) {
+    <app-character-card [character]="character" />
+    }
+  </div>
+
+
+  <app-paginator [currentPage]="paginationService.currentPage()" [totalPages]="totalPages()" />
+</div>

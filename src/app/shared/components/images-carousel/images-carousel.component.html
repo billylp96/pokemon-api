@@ -1,3 +1,24 @@
-<p>
-  images-carousel works!
-</p>
+<!-- Slider main container -->
+<div class="swiper ">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    @for (image of images(); track $index) {
+    <div class="swiper-slide mt-10">
+      <p class="flex justify-center text-green-300"> {{ image.key | titlecase }}</p>
+      <img [src]="image.value" [alt]="image.key" class="size-100 ml-2.5 ">
+    </div>
+    }
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev ">
+  </div>
+  <div class="swiper-button-next ">
+  </div>
+
+  <!-- If we need scrollbar -->
+  <div class="swiper-scrollbar"></div>
+</div>

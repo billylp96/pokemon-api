@@ -1,32 +1,25 @@
-import {  Component, computed, effect, inject, OnInit, Signal } from '@angular/core';
-import { PokemonService } from '../../services/pokemon.service';
+import { Component, computed, effect, inject, OnInit } from '@angular/core';
+import { toSignal, rxResource } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { PokemonService } from '../../services/pokemon.service';
+import { Image, ImagesCarouselComponent } from '../../../shared/components/images-carousel/images-carousel.component';
+import { PokemonNamePipe } from "../../pipes/pokemon-name.pipe";
+import { PokemonTypeColorPipe } from "../../pipes/pokemon-type-color.pipe";
 import { CommonModule, TitleCasePipe } from '@angular/common';
 
-// import Swiper and modules styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { PokemonTypeColorPipe } from "../../pipes/pokemon-type-color.pipe";
-import { PokemonNamePipe } from "../../pipes/pokemon-name.pipe";
-import { Image, ImagesCarouselComponent } from "../../../shared/components/images-carousel/images-carousel.component";
-import { PokemonViewCardComponent } from "../../components/pokemon-view-card/pokemon-view-card.component";
-import { TittleComponent } from "../../../shared/components/tittle/tittle.component";
-
 @Component({
-  selector: 'app-pokemon-view-page',
-  templateUrl: './pokemon-view-page.component.html',
-  styleUrls: ['./pokemon-view-page.component.css'],
-  imports: [TitleCasePipe, CommonModule, PokemonTypeColorPipe, PokemonNamePipe, ImagesCarouselComponent, PokemonViewCardComponent, TittleComponent]
+  selector: 'app-pokemon-view-card',
+  templateUrl: './pokemon-view-card.component.html',
+  styleUrls: ['./pokemon-view-card.component.css'],
+  imports: [ImagesCarouselComponent, PokemonNamePipe, PokemonTypeColorPipe,TitleCasePipe
+    ,CommonModule
+  ]
 })
-export class PokemonViewPageComponent {
-  private service = inject(PokemonService);
+export class PokemonViewCardComponent {
+ private service = inject(PokemonService);
   private activatedRoute = inject(ActivatedRoute);
   private audio=new Audio();
-
-  title:string='Pokémon Info';
 
   pokemonName = toSignal(
     this.activatedRoute.paramMap.pipe(

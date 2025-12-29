@@ -5,19 +5,21 @@ import { PaginatorComponent } from '../../../../shared/components/paginator/pagi
 import { PaginatorService } from '../../../../shared/components/paginator/paginator.service';
 import { DbzService } from '../../../services/dbz.service';
 import { CharacterCardComponent } from '../../card/character-card/character-card.component';
+import { LoadingSpinnerComponent } from "../../../../shared/components/loading-spinner/loading-spinner.component";
+import { TittleComponent } from "../../../../shared/components/tittle/tittle.component";
 
 
 @Component({
   selector: 'app-list-characters',
   templateUrl: './list-characters.component.html',
   styleUrls: ['./list-characters.component.css'],
-  imports: [PaginatorComponent, CharacterCardComponent]
+  imports: [PaginatorComponent, CharacterCardComponent, LoadingSpinnerComponent, TittleComponent]
 })
 export class ListCharactersComponent {
 
  service = inject(DbzService);
   paginationService = inject(PaginatorService)
-
+  title='Dragon Ball Characters'
 
   dbzResource = rxResource({
     params: () => ({ page: this.paginationService.currentPage()  }),

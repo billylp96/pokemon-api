@@ -2,7 +2,7 @@ import { CharactersResponse } from './../interfaces/characters-response';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { Observable, of, tap } from 'rxjs';
+import { delay, Observable, of, tap } from 'rxjs';
 import { Character } from '../interfaces/character-interface';
 import {PlanetResponse } from '../interfaces/planet-response';
 import { Planet } from '../interfaces/planet-interface';
@@ -25,7 +25,9 @@ export class DbzService {
 
     if(sessionStorage.getItem(key)){
       const characterResponse=JSON.parse(sessionStorage.getItem(key) || "{}");
-      return of(characterResponse)
+      return of(characterResponse).pipe(
+        delay(100)
+      )
     }
 
     return this.http.get<CharactersResponse>(`${this.url}/characters`, {
@@ -35,7 +37,8 @@ export class DbzService {
         limit
       }
     }).pipe(
-      tap((res)=>sessionStorage.setItem(key,JSON.stringify(res)))
+      tap((res)=>sessionStorage.setItem(key,JSON.stringify(res))),
+      delay(300)
     )
 
   }
