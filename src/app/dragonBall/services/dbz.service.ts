@@ -9,8 +9,15 @@ import { Planet } from '../interfaces/planet-interface';
 
 interface DbzOptions {
   page?: number,
-  limit?: number
+  limit?: number,
+  race?:string
 }
+
+export interface CharactersVM {
+  items: Character[];
+  totalPages: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +27,7 @@ export class DbzService {
   private http = inject(HttpClient);
 
   getCharacters(options: DbzOptions): Observable<CharactersResponse> {
-    const { page = 0, limit = 10 } = options
+    const { page = 0, limit = 10} = options
     const key = `dbz-characters-${page}-${limit}`
 
     if(sessionStorage.getItem(key)){
@@ -29,12 +36,34 @@ export class DbzService {
         delay(100)
       )
     }
-
     return this.http.get<CharactersResponse>(`${this.url}/characters`, {
       params:
       {
         page,
         limit
+      }
+    }).pipe(
+      tap((res)=>sessionStorage.setItem(key,JSON.stringify(res))),
+      delay(300)
+    )
+
+  }
+
+  getCharactersByRace(options: DbzOptions): Observable<Character[]> {
+    const { race="Human" } = options
+    const key = `dbz-characters-${race}`
+
+    if(sessionStorage.getItem(key)){
+      const characterResponse=JSON.parse(sessionStorage.getItem(key) || "{}");
+      return of(characterResponse).pipe(
+        delay(100)
+      )
+    }
+
+    return this.http.get<Character[]>(`${this.url}/characters`, {
+      params:
+      {
+        race,
       }
     }).pipe(
       tap((res)=>sessionStorage.setItem(key,JSON.stringify(res))),

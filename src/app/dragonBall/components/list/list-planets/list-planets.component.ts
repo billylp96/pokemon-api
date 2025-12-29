@@ -6,12 +6,13 @@ import { PaginatorComponent } from "../../../../shared/components/paginator/pagi
 import { PlanetCardComponent } from "../../card/planet-card/planet-card.component";
 import { TittleComponent } from "../../../../shared/components/tittle/tittle.component";
 import { LoadingSpinnerComponent } from "../../../../shared/components/loading-spinner/loading-spinner.component";
+import { MenuButtonsComponent } from "../../menu-buttons/menuButtons/menuButtons.component";
 
 @Component({
   selector: 'app-list-planets',
   templateUrl: './list-planets.component.html',
   styleUrls: ['./list-planets.component.css'],
-  imports: [PaginatorComponent, PlanetCardComponent, TittleComponent, LoadingSpinnerComponent]
+  imports: [PaginatorComponent, PlanetCardComponent, TittleComponent, LoadingSpinnerComponent, MenuButtonsComponent]
 })
 export class ListPlanetsComponent {
   service = inject(DbzService);

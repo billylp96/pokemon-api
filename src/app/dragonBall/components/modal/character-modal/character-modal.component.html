@@ -1,13 +1,12 @@
 <dialog #modal class="modal modal-bottom sm:modal-middle">
   <div class="modal-box max-w-3xl">
 
-    <h3 class="text-4xl font-bold mb-5 flex justify-center">
+    <h3 class="text-4xl font-bold mb-5 flex justify-center text-gray-400">
       {{ characterResource.value()?.name }}
     </h3>
 
     <div class="mb-10">
-      <h1 class="text-4xl">Planet</h1>
-      <hr>
+      <h1 class="text-4xl text-amber-600">Planet</h1>
       @for (propertie of originPlanet(); track propertie) {
       <div class="mt-5">
         <p><span class="font-extrabold"> {{propertie.key | titlecase}}</span> : {{propertie.value}}</p>
@@ -15,10 +14,10 @@
       }
     </div>
 
+    <hr>
     @if(transformationsArray()?.length!>0){
-    <div>
-      <h1 class="text-4xl">Transformations</h1>
-      <hr>
+    <div class="mt-5">
+      <h1 class="text-4xl text-amber-400">Transformations</h1>
 
       @for (transformation of transformationsArray(); track transformation) {
       <div class="mt-5 text-2xl mb-10 flex justify-center">
@@ -39,8 +38,7 @@
       <button class="btn" (click)="closeModal()">Close</button>
     </div>
     <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-      (click)="closeModal()">✕</button>
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" (click)="closeModal()">✕</button>
     </form>
   </div>
 </dialog>

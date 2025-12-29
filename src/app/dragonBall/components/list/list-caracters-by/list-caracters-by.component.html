@@ -1,13 +1,14 @@
-
-
-
 <div class="flex flex-col min-h-screen">
-  <app-tittle [title]="title"/>
+  <app-tittle [title]="title" />
 
-  <app-menuButtons/>
+  <app-menuButtons />
 
-
-  <app-paginator [currentPage]="paginationService.currentPage()" [totalPages]="totalPages()" />
+  <select class="select select-secondary" (change)="filtrar($event)">
+    <option disabled selected>Search by race</option>
+    @for (race of races() ; track race) {
+    <option [value]="race">{{race}}</option>
+    }
+  </select>
 
   @if (dbzResource.isLoading()){
   <app-loading-spinner />
@@ -21,5 +22,4 @@
   </div>
 
 
-  <app-paginator [currentPage]="paginationService.currentPage()" [totalPages]="totalPages()" />
 </div>

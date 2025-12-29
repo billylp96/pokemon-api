@@ -1,5 +1,7 @@
 <div class="flex flex-col min-h-screen">
   <app-tittle [title]="title" />
+
+  <app-menuButtons />
   <app-paginator [currentPage]="paginationService.currentPage()" [totalPages]="totalPages()"></app-paginator>
 
 
