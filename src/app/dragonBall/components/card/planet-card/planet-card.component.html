@@ -1,10 +1,10 @@
-<div class="card lg:card-side bg-base-100 shadow-sm mb-10">
+<div class="card sm:card-side bg-base-100 shadow-sm mb-10">
   <figure>
     <img [src]="planet().image" [alt]="planet().image" class="size-100" />
   </figure>
-  <div class="card-body w-100">
+  <div class="card-body w-full sm:w-100">
     @for (prop of planetProperties(planet()); track prop.key) {
-    <p class="card-title text-gray-400 font-bold">
+    <p class="card-title text-amber-100 font-bold">
       {{ prop.key | titlecase }} :
     </p>
     <p class="">{{ prop.value }} </p>

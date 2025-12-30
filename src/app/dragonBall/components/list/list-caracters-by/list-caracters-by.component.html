@@ -3,19 +3,24 @@
 
   <app-menuButtons />
 
-  <select class="select select-secondary" (change)="filtrar($event)">
-    <option disabled selected>Search by race</option>
-    @for (race of races() ; track race) {
-    <option [value]="race">{{race}}</option>
-    }
-  </select>
+  <div class="flex justify-center ">
+    <select class="select select-secondary 
+    w-40
+    sm:w-50" (change)="filtrar($event)">
+      <option disabled selected>Search by race</option>
+      @for (race of races() ; track race) {
+      <option [value]="race">{{race}}</option>
+      }
+    </select>
+  </div>
 
   @if (dbzResource.isLoading()){
   <app-loading-spinner />
   }
 
 
-  <div class="grid grid-cols-2 gap-5 flex-1">
+  <div class="grid grid-cols-1 gap-5 flex-1
+    sm:grid-cols-2">
     @for (character of characters(); track character.id) {
     <app-character-card [character]="character" />
     }
