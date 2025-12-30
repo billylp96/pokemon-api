@@ -1,12 +1,13 @@
-<div class="card bg-base-100 w-50 shadow-sm mb-5 cursor-pointer">
+<div class="card bg-base-100 w-40 shadow-sm mb-15 cursor-pointer 
+  sm:w-50 md:w-50 lg:w-50">
 
   <a [routerLink]="['../view',pokemonResource.value()?.name]">
     <figure>
       <img [src]="pokemonResource.value()?.sprites?.front_default" [alt]="pokemonResource.value()?.name"
         class="size-30" />
     </figure>
-    <div class="card-body">
-      <h2 class="card-title">
+    <div class="card-body px-2">
+      <h2 class="card-title justify-center">
         {{pokemonResource.value() | pokemonName | titlecase}}
       </h2>
 

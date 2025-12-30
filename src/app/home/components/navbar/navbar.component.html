@@ -1,15 +1,20 @@
+<div class="navbar bg-base-100 shadow-sm px-2 sm:px-4 lg:px-8">
 
-<div class="navbar bg-base-100 shadow-sm">
+  <!-- LEFT -->
   <div class="navbar-start">
-    <a class="btn btn-ghost text-xl" routerLink="/home/pokemon">daisyUIa</a> 
+    <a class="btn btn-ghost text-xl" routerLink="/home/pokemon">
+      API 🐱
+    </a>
   </div>
+
+  <!-- CENTER (Desktop) -->
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
       <li><a routerLink="/home/pokemon">Api Pokémon</a></li>
       <li>
         <details>
           <summary>Parent</summary>
-          <ul class="p-2 bg-base-100 w-40 z-1">
+          <ul class="p-2 bg-base-100 w-40 shadow">
             <li><a>Submenu 1</a></li>
             <li><a>Submenu 2</a></li>
           </ul>
@@ -18,7 +23,26 @@
       <li><a routerLink="/home/dbz">Api DragonBall</a></li>
     </ul>
   </div>
+
+  <!-- RIGHT -->
   <div class="navbar-end">
-    <a class="btn">Button</a>
+
+    <!-- Mobile menu -->
+    <div class="dropdown dropdown-end lg:hidden">
+      <label tabindex="0" class="btn btn-ghost">
+        ☰
+      </label>
+
+      <ul
+        tabindex="0"
+        class="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+      >
+        <li><a routerLink="/home/pokemon">Api Pokémon</a></li>
+        <li><a routerLink="/home/dbz">Api DragonBall</a></li>
+      </ul>
+    </div>
+
+    <!-- Desktop button -->
+    <!-- <a class="btn hidden lg:inline-flex">Button</a> -->
   </div>
 </div>

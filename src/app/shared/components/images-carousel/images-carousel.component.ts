@@ -14,12 +14,12 @@ export interface Image {
   templateUrl: './images-carousel.component.html',
   styleUrls: ['./images-carousel.component.css'],
   imports:[TitleCasePipe],
-  styles: `
-    .swiper {
-      width: 30%;
-      height: 50%;
-    }
-  `,
+  // styles: `
+  //   .swiper {
+  //     width: 30%;
+  //     height: 50%;
+  //   }
+  // `,
 })
 export class ImagesCarouselComponent {
   images = input.required<Image[]>();
