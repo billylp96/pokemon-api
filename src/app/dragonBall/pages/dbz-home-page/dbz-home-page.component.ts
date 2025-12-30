@@ -1,17 +1,15 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { delay, tap } from 'rxjs';
+import { delay} from 'rxjs';
 import { PaginatorService } from '../../../shared/components/paginator/paginator.service';
 import { DbzService } from '../../services/dbz.service';
-import { CharacterCardComponent } from "../../components/card/character-card/character-card.component";
-import { PaginatorComponent } from "../../../shared/components/paginator/paginator.component";
-import { RouterOutlet, RouterLinkWithHref } from "@angular/router";
+import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-dbz-home-page',
   templateUrl: './dbz-home-page.component.html',
   styleUrls: ['./dbz-home-page.component.css'],
-  imports: [ RouterOutlet, RouterLinkWithHref]
+  imports: [ RouterOutlet]
 })
 export class DbzHomePageComponent {
   service = inject(DbzService);

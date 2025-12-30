@@ -3,15 +3,13 @@ import { PokemonService } from '../../services/pokemon.service';
 import { ActivatedRoute } from '@angular/router';
 import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { CommonModule, TitleCasePipe } from '@angular/common';
+import { CommonModule} from '@angular/common';
 
 // import Swiper and modules styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { PokemonTypeColorPipe } from "../../pipes/pokemon-type-color.pipe";
-import { PokemonNamePipe } from "../../pipes/pokemon-name.pipe";
-import { Image, ImagesCarouselComponent } from "../../../shared/components/images-carousel/images-carousel.component";
+import { Image} from "../../../shared/components/images-carousel/images-carousel.component";
 import { PokemonViewCardComponent } from "../../components/pokemon-view-card/pokemon-view-card.component";
 import { TittleComponent } from "../../../shared/components/tittle/tittle.component";
 
@@ -19,7 +17,7 @@ import { TittleComponent } from "../../../shared/components/tittle/tittle.compon
   selector: 'app-pokemon-view-page',
   templateUrl: './pokemon-view-page.component.html',
   styleUrls: ['./pokemon-view-page.component.css'],
-  imports: [TitleCasePipe, CommonModule, PokemonTypeColorPipe, PokemonNamePipe, ImagesCarouselComponent, PokemonViewCardComponent, TittleComponent]
+  imports: [ CommonModule,  PokemonViewCardComponent, TittleComponent]
 })
 export class PokemonViewPageComponent {
   private service = inject(PokemonService);
