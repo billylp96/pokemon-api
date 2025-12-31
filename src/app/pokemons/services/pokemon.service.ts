@@ -43,7 +43,7 @@ export class PokemonService {
       delay(300),
       map(res => {
         const results = res.results.filter((p: any) =>
-          p.name.includes(term)
+          p.name.includes(term.trim())
         );
 
         return {
